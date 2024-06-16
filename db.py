@@ -1,5 +1,5 @@
 from market import app, db
-from models import Item
+from market.models import User,Item
 
 with app.app_context():
     db.create_all()
