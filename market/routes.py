@@ -1,6 +1,7 @@
-from market import app
-from flask import render_template
-from market.models import Item
+from market import app,db
+from flask import render_template,redirect,url_for
+from market.models import Item,User
+from market.forms import RegisterForm
 @app.route('/')
 @app.route('/home')
 def Home():
@@ -15,6 +16,14 @@ def Market():
 @app.route('/login')
 def Login():
     return render_template('index.html')
-@app.route('/register')
+@app.route('/register',methods=['GET', 'POST'])
 def Register():
-    return render_template('index.html')
+    form = RegisterForm()
+    if form.validate_on_submit():
+        user = User(username = form.username.data,
+                    email=form.email.data,
+                    password_hash=form.password1.data)
+        db.session.add(user)
+        db.session.commit()
+        return redirect(url_for('Market'))
+    return render_template('register.html', form=form)
