@@ -43,12 +43,6 @@
 
   {% with messages = get_flashed_messages(with_categories=true) %}
   {% if messages %}
-  <div class="d-flex justify-content-center w-100 my-2">
-    <span class="bg-primary text-white w-50 fs-4 py-2 text-center">
-        Please Correct The Following Errors And Try Again
-    </span>
-</div>
-
   <ul>
     {% for category, message in messages %}
     <div class="alert alert-{{category}} m-3">
