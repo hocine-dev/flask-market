@@ -18,6 +18,9 @@ class User(db.Model,UserMixin):
     @property
     def password(self):
         return self.password
+    @property
+    def nice_budget(self):
+        return f"{self.budget:,}"
 
     @password.setter
     def password(self,plain_text_password):

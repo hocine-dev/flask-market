@@ -8,6 +8,8 @@ app.config['SECRET_KEY'] = '0x769f6de692'
 db = SQLAlchemy(app)
 b_crypt = Bcrypt(app)
 login_manager = LoginManager(app)
+login_manager.login_view = "Login"
+login_manager.login_message_category = "info"
 
 
 

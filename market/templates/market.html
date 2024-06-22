@@ -3,30 +3,48 @@
 Flask Market | Market page
 {% endblock %}
 {% block content %}
-<h1 class="text-center my-3" >Market page</h1>
-<table class="table table-hover table-dark">
-    <thead class="thead-dark">
-        <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Name</th>
-            <th scope="col">Barcode</th>
-            <th scope="col">Price</th>
-            <th scope="col">Options</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for item in items %}
-        <tr>
-            <td>{{item.id}}</td>
-            <td>{{item.name}}</td>
-            <td>{{item.barcode}}</td>
-            <td>{{item.price}} $</td>
-            <td>
-                <button class="btn btn-outline btn-info">More Info</button>
-                <button class="btn btn-outline btn-success">Purchase</button>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<h1 class="text-center my-3">Market page</h1>
+
+
+<div class="row my-2 mx-2">
+
+    <div class="col-8 my-5">
+        <h2 class="my-5 text-center">Available Items On The MArket</h2>
+        <table class="table table-hover table-dark">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Barcode</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Options</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                {% include "includes/modals.html"%}
+                <tr>
+                    <td>{{item.id}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.barcode}}</td>
+                    <td>{{item.price}} $</td>
+                    <td>
+                        <button class="btn btn-outline btn-info" data-toggle="modal" data-target="#Modal-MoreInfo-{{item.id}}">More
+                            Info</button>
+                        <button class="btn btn-outline btn-success" data-toggle="modal" data-target="#Modal-PurchaseConfirm-{{item.id}}">Purchase</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="col-4 my-5">
+        <h2 class="my-5 text-center">Items You Own</h2>
+    </div>
+</div>
+
+
+
+
+
 {% endblock %}
