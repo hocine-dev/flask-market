@@ -41,4 +41,8 @@ class Item(db.Model):
     barcode = db.Column(db.Integer(), unique=True, nullable=False)
     price = db.Column(db.Float(), nullable=False)
     owner = db.Column(db.Integer(),db.ForeignKey('user.id'))
+    def buy(self,user):
+        self.owner = user.id
+        user.budget -= self.price
+        db.session.commit()
     
