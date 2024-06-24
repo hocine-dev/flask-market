@@ -31,6 +31,13 @@ def Market():
                 
             else:
                 flash(f'Your Budget is not enough to by {p_item_obj.name}',category='danger')
+        sold_item = request.form.get('sold_item')
+        s_item_obj = Item.query.filter_by(name=sold_item).first()
+        if s_item_obj:
+            if current_user.can_sell(s_item_obj):
+                s_item_obj.sell(current_user)
+                flash(f'success,you have sold {s_item_obj.name} for {s_item_obj.price}$',category='success')
+    
         return redirect(url_for('Market'))     
 
     if request.method == "GET":
